@@ -10,6 +10,10 @@ import { heroes } from '../hero.data';
 export class HeroListComponent implements OnInit {
 
   heroes: Hero[] = [];
+  orden: string = 'asc';
+  detalleHero: Hero;
+  detalle: boolean = false;
+  team: boolean = false;
 
   constructor() {
     this.heroes = heroes;
@@ -23,7 +27,10 @@ export class HeroListComponent implements OnInit {
     return hero.id;  // object identity
   }
 
-  heroeSeleccionado(hero: Hero): void {
+  detalleTeam(hero: Hero): void {
+    this.detalleHero = hero;
+    this.team = true;
+
     for (let i = 0; i < heroes.length; i++) {
       if (heroes[i].seleccionado === true) {
         this.heroes[i].seleccionado = false;
@@ -38,22 +45,27 @@ export class HeroListComponent implements OnInit {
   }
 
   detallesHero(hero: Hero): void {
+    this.detalleHero = hero;
+    this.detalle = true;
 
+    for (let i = 0; i < heroes.length; i++) {
+      if (heroes[i].seleccionado === true) {
+        this.heroes[i].seleccionado = false;
+      }
+    }
+    
+    const encontrado = this.heroes.findIndex(heroe => heroe.id === hero.id);
+
+    if (encontrado >= 0) {
+      hero.seleccionado = true;
+    }
   }
 
   ordenar(): void {
-    this.heroes.sort(function (a, b) {
-      switch (true) {
-        case a.team>b.team:
-          return 1;
-          break;
-        case a.team<b.team:
-          return -1;
-          break;
-        default:
-          return 0;
-          break;
-      }
-    });
+    if (this.orden == 'asc') {
+      this.orden = 'desc';
+    } else {
+      this.orden = 'asc';
+    }
   }
 }

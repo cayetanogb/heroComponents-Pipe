@@ -21,15 +21,15 @@
     <!-- Pagina 5 - Iterar por los datos -->
     <!-- Pagina 6 - -->
     <!-- Pagina 7 - trackBy-->
-    <tr *ngFor="let hero of heroes; index as i; trackBy: trackByHeroes" [ngClass]="{'table-primary': hero.seleccionado === true}">
+    <tr *ngFor="let hero of heroes | sort:orden; index as i; trackBy: trackByHeroes" [ngClass]="{'table-primary': hero.seleccionado === true}">
       <td scope="row" class="table-primary">{{ i+1 }}</td>
       <td>{{ hero.name }}</td>
       <td>{{ hero.team }}</td>
       <td>
         <button type="button" class="btn btn-primary" (click)="detallesHero(hero)">Details</button>
       </td>
-      <td><span class="badge rounded-pill bg-warning text-dark">Warning</span></td>
-      <td><span class="badge rounded-pill bg-info text-dark" (click)="heroeSeleccionado(hero)">Info</span></td>
+      <td><span class="badge rounded-pill bg-warning text-dark"  (click)="detalleTeam(hero)">Warning</span></td>
+      <td><span class="badge rounded-pill bg-info text-dark">Info</span></td>
     </tr>
 
   </tbody>
@@ -38,6 +38,17 @@
 <ng-template #noHero>
   <p>No hay heroes</p>
 </ng-template>
+
+<div *ngIf="team">
+  <p>Team: {{ detalleHero.team }}</p>
+</div>
+
+<div class="card" style="width: 18rem;" *ngIf="detalle">
+  <div class="card-body">
+    <h5 class="card-title">{{ detalleHero.name }}</h5>
+    <p class="card-text">Team: {{ detalleHero.team }}</p>
+  </div>
+</div>
 
 <!-- ejercicio: Poner este tipo de badge segun ngSwitch para indicar el tipo de heroe -->
 <!-- <span class="badge rounded-pill bg-warning text-dark">Warning</span>

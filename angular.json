@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "ch04-enhanceComponents"
+  "defaultProject": "ch04-enhanceComponents",
+  "cli": {
+    "analytics": false
+  }
 }

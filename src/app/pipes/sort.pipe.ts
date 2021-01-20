@@ -19,10 +19,10 @@ export class SortPipe implements PipeTransform {
     if ( value ) {
 
       return value.sort( (a: Hero, b: Hero) => {
-        if (a[args] < b[args] ) {
-            return -1;
-        } else if (b[args] < a[args] ) {
-            return 1;
+        if (a['team'] < b['team'] ) {
+            return (args != 'desc') ? -1 : 1;
+        } else if (b['team'] < a['team'] ) {
+            return (args != 'desc') ? 1 : -1;
         }
 
         // equals

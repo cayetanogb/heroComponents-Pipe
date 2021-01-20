@@ -11,12 +11,18 @@ export class HeroListElementsComponent implements OnInit {
 
   @Input() listaHeroes: Hero[];
   muestra: string = 'tabla';
+  loading: boolean = false;
 
   constructor() {
     this.listaHeroes = heroes;
   }
 
   ngOnInit(): void {
+    setInterval(() => {
+      this.loading = false;
+    }, 4000);
+
+    this.loading = true;
   }
 
   mostrarTabla(): void {
