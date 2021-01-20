@@ -1,4 +1,4 @@
-import { Component, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Hero } from '../hero.model';
 import { heroes } from '../hero.data';
 
@@ -11,9 +11,12 @@ export class HeroListComponent implements OnInit {
 
   heroes: Hero[] = [];
   orden: string = 'asc';
-  detalleHero: Hero;
-  detalle: boolean = false;
-  team: boolean = false;
+  @Input() id: number;
+  @Input() name: string;
+  @Input() team: string;
+  @Input() seleccionado: boolean;
+
+  @Output() datos = new EventEmitter<Hero>(null);
 
   constructor() {
     this.heroes = heroes;
@@ -27,33 +30,13 @@ export class HeroListComponent implements OnInit {
     return hero.id;  // object identity
   }
 
-  detalleTeam(hero: Hero): void {
-    this.detalleHero = hero;
-    this.team = true;
+  emit(hero: Hero): void {
+    this.datos.emit(hero);
 
     for (let i = 0; i < heroes.length; i++) {
-      if (heroes[i].seleccionado === true) {
-        this.heroes[i].seleccionado = false;
-      }
+      heroes[i].seleccionado = false;
     }
-    
-    const encontrado = this.heroes.findIndex(heroe => heroe.id === hero.id);
 
-    if (encontrado >= 0) {
-      hero.seleccionado = true;
-    }
-  }
-
-  detallesHero(hero: Hero): void {
-    this.detalleHero = hero;
-    this.detalle = true;
-
-    for (let i = 0; i < heroes.length; i++) {
-      if (heroes[i].seleccionado === true) {
-        this.heroes[i].seleccionado = false;
-      }
-    }
-    
     const encontrado = this.heroes.findIndex(heroe => heroe.id === hero.id);
 
     if (encontrado >= 0) {

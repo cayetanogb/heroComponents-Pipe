@@ -2,7 +2,24 @@
 <!-- Al hacer click en el heroe, a traves de comunicacion con componentes -->
 <!-- Mostrar la informacion del heroe seleccionado en la derecha -->
 
-<app-hero></app-hero>
+<div class="container">
+  <div class="row">
+    <div class="col-sm col-md-8">
+      <app-hero-list (datos)="recibe($event)"></app-hero-list>
+    </div>
+    <div class="col-sm col-md-4">
+      <app-hero *ngIf="heroe" [name]="heroe.name" [team]="heroe.team"></app-hero>
+    </div>
+  </div>
+</div>
+
+<div class="container">
+  <div class="row">
+    <div class="col-sm col-md">
+      <app-hero-list-elements></app-hero-list-elements>
+    </div>
+  </div>
+</div>
 
 <!--
 <app-heroes></app-heroes>

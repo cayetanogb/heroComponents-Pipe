@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Hero } from './hero.model';
 
 @Component({
   selector: 'app-root',
@@ -7,4 +8,10 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'ch04-enhanceComponents';
+
+  heroe: Hero;
+
+  recibe(hero: Hero): void {
+    this.heroe = hero;
+  }
 }

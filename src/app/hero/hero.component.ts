@@ -11,6 +11,7 @@ export class HeroComponent implements OnInit {
 
   heroes: Hero[] = [];
   @Input() name: string;
+  @Input() team: string;
 
   constructor() {
     this.heroes = heroes;
