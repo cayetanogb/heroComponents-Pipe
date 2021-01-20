@@ -37,11 +37,7 @@ export class HeroListComponent implements OnInit {
       heroes[i].seleccionado = false;
     }
 
-    const encontrado = this.heroes.findIndex(heroe => heroe.id === hero.id);
-
-    if (encontrado >= 0) {
-      hero.seleccionado = true;
-    }
+    hero.seleccionado = true;
   }
 
   ordenar(): void {
